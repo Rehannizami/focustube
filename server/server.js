@@ -1,60 +1,46 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import youtubeRoutes from './routes/youtube.js';
+
+// 1. Initialize dotenv immediately
+dotenv.config();
+
+// 2. Debug: Check for API Key
 console.log("Checking for API Key...");
 if (process.env.YOUTUBE_API_KEY) {
     console.log("✅ API Key found!");
 } else {
     console.error("❌ API Key NOT found in environment!");
 }
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import youtubeRoutes from './routes/youtube.js';
-
-dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-app.use('/api', youtubeRoutes);
-app.use(cors()); 
-app.use(express.json()); 
-
+// 3. Middleware
+app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../')));
 
-// ---------------------------------------------------------
-// API Routes (Connected)
-// ---------------------------------------------------------
+// 4. API Routes
 app.use('/api/youtube', youtubeRoutes);
 
-// ---------------------------------------------------------
-// Front-end Page Routes
-// ---------------------------------------------------------
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
-});
+// 5. Front-end Page Routes
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')));
+app.get('/search', (req, res) => res.sendFile(path.join(__dirname, '../search.html')));
+app.get('/player', (req, res) => res.sendFile(path.join(__dirname, '../player.html')));
+app.get('/documentation', (req, res) => res.sendFile(path.join(__dirname, '../documentation.html')));
 
-app.get('/search', (req, res) => {
-    res.sendFile(path.join(__dirname, '../search.html'));
-});
-
-app.get('/player', (req, res) => {
-    res.sendFile(path.join(__dirname, '../player.html'));
-});
-
-// THIS EXACT BLOCK MUST EXIST:
-app.get('/documentation', (req, res) => {
-    res.sendFile(path.join(__dirname, '../documentation.html'));
-});
-
-// The 404 Fallback that you are currently seeing
+// 6. 404 Fallback
 app.use((req, res) => {
     res.status(404).send('Page not found on FocusTube');
 });
 
+// 7. Server Start
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 FocusTube server is running on port ${PORT}`);
 });
