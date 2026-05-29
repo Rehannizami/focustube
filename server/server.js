@@ -1,3 +1,10 @@
+require('dotenv').config();
+console.log("Checking for API Key...");
+if (process.env.YOUTUBE_API_KEY) {
+    console.log("✅ API Key found!");
+} else {
+    console.error("❌ API Key NOT found in environment!");
+}
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
