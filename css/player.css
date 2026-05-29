@@ -1,0 +1,697 @@
+/* ==========================================================================
+   FOCUSTUBE: THEATER PLAYER & FOCUS HUB STYLESHEET
+   High-fidelity, responsive grid layout for cinematic video playback.
+   Length: 400+ lines of robust structural and interactive CSS.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. THEATER SPECIFIC TOKENS
+   -------------------------------------------------------------------------- */
+:root {
+    --theater-bg-light: #f4f4f5;
+    --theater-surface-light: rgba(255, 255, 255, 0.6);
+    --theater-border-light: rgba(0, 0, 0, 0.1);
+    --timer-font: 'Courier Prime', 'Courier New', monospace;
+    --success-green: #10b981;
+    --success-green-dim: rgba(16, 185, 129, 0.15);
+}
+
+[data-theme="dark"] {
+    --theater-bg-dark: #050505;
+    --theater-surface-dark: rgba(15, 15, 18, 0.7);
+    --theater-border-dark: rgba(255, 255, 255, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   2. VIEWPORT & STRUCTURAL LAYOUT
+   -------------------------------------------------------------------------- */
+.theater-viewport {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 100px 32px 40px 32px;
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    transition: background-color 0.5s ease, opacity 0.5s ease;
+}
+
+/* Advanced Grid System */
+.theater-layout-grid {
+    display: grid;
+    /* 2.5 parts for the video, 1 part for the focus tools */
+    grid-template-columns: 2.7fr 1fr;
+    gap: 32px;
+    width: 100%;
+    align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   3. BACKGROUND WATERMARKS
+   -------------------------------------------------------------------------- */
+.player-watermark {
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
+    z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   4. PRIMARY PLAYBACK ZONE (LEFT COLUMN)
+   -------------------------------------------------------------------------- */
+.primary-playback-zone {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    z-index: 10;
+}
+
+/* Massive Neo-Brutalist Video Wrapper */
+.theater-video-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: #000;
+    border-radius: 24px;
+    border: 1px solid var(--theater-border-light);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+[data-theme="dark"] .theater-video-wrapper {
+    border-color: var(--theater-border-dark);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+}
+
+/* Pulse Glow Effect on Hover */
+.theater-video-wrapper:hover {
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2), 0 0 40px rgba(242, 97, 1, 0.1);
+}
+
+[data-theme="dark"] .theater-video-wrapper:hover {
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 40px rgba(242, 97, 1, 0.2);
+}
+
+.theater-video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: inherit;
+    z-index: 5;
+}
+
+/* Video Loading State */
+.loading-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    color: var(--neo-text-muted);
+    z-index: 2;
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--theater-border-light);
+    border-top-color: var(--neo-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+[data-theme="dark"] .spinner {
+    border-color: var(--theater-border-dark);
+    border-top-color: var(--neo-orange);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   5. VIDEO METADATA PANEL
+   -------------------------------------------------------------------------- */
+.video-metadata-panel {
+    background: var(--theater-surface-light);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--theater-border-light);
+    border-radius: 20px;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+[data-theme="dark"] .video-metadata-panel {
+    background: var(--theater-surface-dark);
+    border-color: var(--theater-border-dark);
+}
+
+.meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.active-video-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--neo-text-main);
+    line-height: 1.3;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-badge.live-focus {
+    color: var(--success-green);
+    background: var(--success-green-dim);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.meta-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--theater-border-light);
+    padding-top: 20px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+[data-theme="dark"] .meta-details {
+    border-color: var(--theater-border-dark);
+}
+
+.channel-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.channel-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%; 
+    background-color: var(--neo-orange); 
+    
+    /* FIX FOR STRETCHING: */
+    background-size: cover;        /* Makes the image fill the area without distortion */
+    background-position: center;   /* Keeps the center of the image visible */
+    background-repeat: no-repeat;  /* Prevents tiling if the image is small */
+    aspect-ratio: 1 / 1;           /* Forces the container to be a perfect square */
+    
+    border: 2px solid var(--theater-border-light);
+    flex-shrink: 0; 
+}
+
+.channel-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--neo-text-main);
+}
+
+.verified-tag {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--neo-text-muted);
+    font-weight: 500;
+}
+
+/* Brutal Action Buttons (Copy Link, Lights Out) */
+.brutal-action-group {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-brutal-secondary.small {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .btn-brutal-secondary.small {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.btn-brutal-secondary.small.active-toggle {
+    border-color: var(--neo-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   6. FOCUS TOOLS SIDEBAR (RIGHT COLUMN)
+   -------------------------------------------------------------------------- */
+.focus-tools-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    z-index: 10;
+}
+
+.tool-card {
+    background: var(--theater-surface-light);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--theater-border-light);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+[data-theme="dark"] .tool-card {
+    background: var(--theater-surface-dark);
+    border-color: var(--theater-border-dark);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.tool-title {
+    font-size: 1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--neo-text-main);
+    margin: 0;
+}
+
+/* Command Center Grid */
+.command-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.command-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--theater-border-light);
+    border-radius: 12px;
+    padding: 16px 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .command-btn {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--theater-border-dark);
+}
+
+.command-btn:hover:not(.disabled) {
+    background: var(--neo-glass-bg);
+    border-color: var(--neo-orange);
+    transform: translateY(-2px);
+}
+
+.command-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.cmd-icon {
+    font-size: 1.5rem;
+}
+
+.cmd-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--neo-text-main);
+}
+
+/* Pomodoro Tracker */
+.pomodoro-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pomo-cycle-count {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--neo-text-muted);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+[data-theme="dark"] .pomo-cycle-count {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.timer-display {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.timer-digits {
+    font-family: var(--timer-font);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--neo-text-main);
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.timer-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.timer-secondary-controls {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-brutal-secondary.micro {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+}
+
+/* Scratchpad / Notes */
+.scratchpad-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-icon-only {
+    background: transparent;
+    border: none;
+    color: var(--neo-text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-icon-only:hover {
+    color: var(--neo-text-main);
+}
+
+.neo-textarea {
+    width: 100%;
+    max-width: 100%; /* Prevents horizontal dragging overflow */
+    box-sizing: border-box; /* THIS FIXES THE BOUNDARY BLEED */
+    min-height: 150px;
+    background: rgba(0, 0, 0, 0.02);
+    border: 1px solid var(--theater-border-light);
+    border-radius: 12px;
+    padding: 16px;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: var(--neo-text-main);
+    resize: vertical; /* Only allows resizing up and down */
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .neo-textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: var(--theater-border-dark);
+}
+
+.neo-textarea:focus {
+    outline: none;
+    border-color: var(--neo-orange);
+    background: var(--neo-glass-bg);
+}
+
+.neo-textarea::placeholder {
+    color: var(--neo-text-muted);
+    opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   7. "LIGHTS OUT" CINEMATIC MODE OVERRIDES
+   -------------------------------------------------------------------------- */
+/* When .lights-out class is applied to the <body> */
+body.lights-out {
+    background-color: #000 !important;
+}
+
+body.lights-out .player-nav,
+body.lights-out .player-watermark,
+body.lights-out .focus-tools-sidebar,
+body.lights-out .video-metadata-panel {
+    opacity: 0.05;
+    pointer-events: none;
+    filter: blur(2px);
+    transition: all 0.5s ease;
+}
+
+body.lights-out .theater-video-wrapper {
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+    transform: scale(1.02);
+    z-index: 100;
+}
+/* Cinematic Exit Button (Only visible during Lights Out) */
+.exit-lights-out-btn {
+    position: fixed;
+    top: 24px;
+    right: 32px;
+    z-index: 10000; /* Must sit above the darkness */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    
+    /* Hidden State */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.exit-lights-out-btn:hover {
+    background: rgba(242, 97, 1, 0.8);
+    border-color: var(--neo-orange);
+    transform: scale(1.05);
+}
+
+/* Active State (Triggered when body has .lights-out) */
+body.lights-out .exit-lights-out-btn {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   8. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+    .theater-layout-grid {
+        grid-template-columns: 1fr; /* Stack video on top of tools */
+    }
+    
+    .focus-tools-sidebar {
+        flex-direction: row; /* Layout tools horizontally if space permits */
+        flex-wrap: wrap;
+    }
+    
+    .tool-card {
+        flex: 1;
+        min-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .theater-viewport {
+        padding: 80px 16px 24px 16px;
+    }
+
+    .active-video-title {
+        font-size: 1.2rem;
+    }
+
+    .meta-header {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .meta-details {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .brutal-action-group {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .focus-tools-sidebar {
+        flex-direction: column;
+    }
+}
+/* --------------------------------------------------------------------------
+   9. NEO-MODAL OVERLAY (Settings & Config)
+   -------------------------------------------------------------------------- */
+.neo-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.neo-modal-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.neo-modal-content {
+    width: 100%;
+    max-width: 420px;
+    padding: 32px;
+    border-radius: 24px;
+    transform: translateY(30px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    background: var(--theater-surface-light);
+    border: 1px solid var(--theater-border-light);
+}
+
+[data-theme="dark"] .neo-modal-content {
+    background: var(--theater-surface-dark);
+    border-color: var(--theater-border-dark);
+}
+
+.neo-modal-overlay.active .neo-modal-content {
+    transform: translateY(0) scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--neo-text-main);
+    font-weight: 800;
+}
+
+.input-group-neo {
+    margin-bottom: 16px;
+}
+
+.input-group-neo label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--neo-text-muted);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.neo-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--theater-border-light);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: var(--neo-text-main);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .neo-input {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: var(--theater-border-dark);
+}
+
+.neo-input:focus {
+    outline: none;
+    border-color: var(--neo-orange);
+    background: var(--neo-glass-bg);
+}
+/* --------------------------------------------------------------------------
+   10. CALCULATOR KEYPAD STYLES
+   -------------------------------------------------------------------------- */
+.btn-calc-key {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--theater-border-light);
+    color: var(--neo-text-main);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    padding: 16px 0;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+[data-theme="dark"] .btn-calc-key {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--theater-border-dark);
+}
+
+.btn-calc-key:active {
+    transform: scale(0.95);
+    background: var(--neo-glass-bg);
+}
+
+.btn-calc-key.operator {
+    color: var(--neo-orange);
+    background: rgba(242, 97, 1, 0.08);
+}
+
+.btn-calc-key.equals:active {
+    background: var(--neo-orange-hover) !important;
+}

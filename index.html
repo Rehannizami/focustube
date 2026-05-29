@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FocusTube | Clean Aesthetic Theater</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Link your existing 492 line global CSS safely first -->
+    <link rel="stylesheet" href="./css/global.css">
+    <!-- Link the new Neo-Brutalist layout engine second to apply overrides -->
+    <link rel="stylesheet" href="./css/landing.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 1. PILL NAVIGATION BAR BAR (Matches image_01c97d.jpg header style) -->
+    <header class="pill-navbar-container">
+        <div style="font-weight: 800; font-size: 1.1rem; color: var(--neo-text-main); padding-left: 8px; display: flex; align-items: center; gap: 6px;">
+            <span style="color: var(--neo-orange);">❖</span> FocusTube
+        </div>
+        
+        <nav class="nav-pill-group">
+            <a href="/" class="nav-link active">Home</a>
+            <a href="/search" class="nav-link">Search</a>
+            <a href="#" class="nav-link">Features</a>
+            <a href="#" class="nav-link">About</a>
+        </nav>
+
+        <button id="themeToggle" class="btn-pill-action">Dark Mode</button>
+    </header>
+
+    <!-- 2. MAIN VISUAL HERO VIEWPORT -->
+    <main class="hero-viewport">
+        
+        <div class="hero-grid-container">
+            
+            <!-- LEFT UTILITY COLUMN -->
+            <section class="hero-content-left">
+                <div class="hero-index-tag">[1/8] THEATER PLATFORM</div>
+                <h2 class="hero-main-statement">
+                    BOOST<br>
+                    YOUR<br>
+                    LEARNING
+                </h2>
+                <p class="hero-description-text">
+                    An intentional open-source streaming alternative engineered specifically to pull video content out of distraction loops and reframe lectures into ultra-clean workspace templates.
+                </p>
+                <div class="hero-cta-group">
+                    <button class="btn-brutal-orange" onclick="window.location.href='/search'">Get Started</button>
+                    <button class="btn-brutal-secondary" onclick="window.location.href='/documentation'">Documentation</button>
+                </div>
+            </section>
+
+            <!-- RIGHT 3D/ASSET SHOWCASE CONTAINER -->
+            <section class="hero-showcase-right">
+                
+                <!-- Macro Growth Tracker Box (Top Right Overlay) -->
+                <div class="neo-metric-card layer-decor-high">
+                    <div class="metric-trend-up">
+                        <span>↑ 132%</span>
+                    </div>
+                    <p class="metric-context-text">
+                        Measurable improvement in lecture information retention recorded throughout extended distraction-free execution cycles.
+                    </p>
+                </div>
+
+                <!-- CENTRAL HERO ASSET FOCUS -->
+                <!-- Replace with your actual transparent 3D laptop/computer PNG or WebP graphic -->
+                <div class="layer-main-focus" style="position: relative; width: 100%; max-width: 500px; display: flex; align-items: center; justify-content: center;">
+                    <img src="./assets/gemini-google-icon-symbol-logo-free-png.webp" alt="Main Geometric Core" style="width: 80%; height: auto; filter: drop-shadow(0 30px 50px rgba(0,0,0,0.15));">
+                </div>
+
+                <!-- FLOATING EXTRA COMPONENT ELEMENTS (Floating Smileys/Notes) -->
+                <div class="layer-decor-high" style="position: absolute; top: 18%; left: 10%; font-size: 3rem; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));">
+                    📝
+                </div>
+                <div class="layer-decor-low" style="position: absolute; bottom: 15%; left: 25%; font-size: 3.5rem; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.08));">
+                    💡
+                </div>
+
+                <!-- FLOATING DESKTOP SOCIAL DOCK (Floating Side Stripe Panel) -->
+                <div class="floating-icon-dock">
+                    <a href="#" class="dock-icon-link">𝕏</a>
+                    <a href="#" class="dock-icon-link">🛜</a>
+                    <a href="#" class="dock-icon-link">🫙</a>
+                </div>
+
+            </section>
+
+        </div>
+
+        <!-- 3. GIANT WATERMARK BACKDROP LAYERING (Intersects view exactly behind objects) -->
+        <div class="brutal-watermark-wrap">
+            <h1 class="watermark-text watermark-solid">PIXEL RISE</h1>
+            <h1 class="watermark-text watermark-pixel layer-decor-low">FOCUS TUBE</h1>
+        </div>
+
+        <!-- 4. BOTTOM INTERACTIVE SCROLL PROMPT -->
+        <div class="scroll-explore-prompt">
+            <span style="font-size: 1rem; animation: fluidFloatOne 2s infinite;">↓</span>
+            <span>Scroll to explore more</span>
+        </div>
+
+    </main>
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/landing.js"></script>
+    <script type="module" src="./js/transition.js"></script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theater Mode | FocusTube</title>
+    <meta name="description" content="Cinematic, distraction-free video playback and focus tools.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/landing.css">
+    <link rel="stylesheet" href="./css/player.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="pill-navbar-container player-nav">
+        <div class="nav-brand-logo">
+            <span class="brand-accent">❖</span> FocusTube
+        </div>
+        
+        <nav class="nav-pill-group">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/search" class="nav-link">Search</a>
+            <a href="/player" class="nav-link active">Theater</a>
+        </nav>
+
+        <button id="themeToggle" class="btn-pill-action">Dark Mode</button>
+    </header>
+
+    <div class="brutal-watermark-wrap player-watermark">
+        <h1 class="watermark-text watermark-solid">FOCUS</h1>
+        <h1 class="watermark-text watermark-pixel layer-decor-low">MODE</h1>
+    </div>
+
+    <main class="theater-viewport">
+        
+        <div class="theater-layout-grid">
+            
+            <section class="primary-playback-zone">
+                
+                <div id="player-container" class="theater-video-wrapper glass-panel shadow-heavy">
+                    <div class="loading-state">
+                        <div class="spinner pulse-animation"></div>
+                        <p class="loading-text">Establishing secure connection...</p>
+                    </div>
+                </div>
+
+                <div class="video-metadata-panel glass-panel">
+                    <div class="meta-header">
+                        <h1 class="active-video-title" id="video-title">Loading Lecture...</h1>
+                        <span class="status-badge live-focus">🟢 Deep Focus Active</span>
+                    </div>
+                    
+                    <div class="meta-details">
+                        <div class="channel-info">
+                            <div class="channel-avatar"></div>
+                            <div class="channel-text">
+                                <h3 id="channel-name">Channel Name</h3>
+                                <p class="verified-tag">Verified Educator</p>
+                            </div>
+                        </div>
+                        
+                        <div class="brutal-action-group">
+                            <button id="btn-copy" class="btn-brutal-secondary small">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                Copy Link
+                            </button>
+                            <button id="btn-lights" class="btn-brutal-secondary small active-toggle">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                Lights Out
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="focus-tools-sidebar">
+    
+    <div class="tool-card command-center glass-panel">
+        <h3 class="tool-title">Command Center</h3>
+        <div class="command-grid">
+            <button id="btn-calc" class="command-btn">
+                <span class="cmd-icon">🧮</span>
+                <span class="cmd-label">Calculator</span>
+            </button>
+            <button id="btn-search" class="command-btn">
+                <span class="cmd-icon">🔍</span>
+                <span class="cmd-label">Web Search</span>
+            </button>
+            <button class="command-btn disabled" title="Coming Soon">
+                <span class="cmd-icon">📚</span>
+                <span class="cmd-label">Formula Sheet</span>
+            </button>
+            <button class="command-btn disabled" title="Coming Soon">
+                <span class="cmd-icon">⚙️</span>
+                <span class="cmd-label">Settings</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="tool-card pomodoro-tracker glass-panel">
+        <div class="pomodoro-header">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <h3 class="tool-title">Session Tracker</h3>
+                <button id="btn-pomo-settings" class="btn-icon-only" style="padding: 2px;" title="Timer Settings">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                </button>
+            </div>
+            <span class="pomo-cycle-count" id="pomo-status">Focus</span>
+        </div>
+        
+        <div class="timer-display">
+            <span class="timer-digits" id="timer-display">25:00</span>
+        </div>
+        
+        <div class="timer-controls">
+            <button class="btn-brutal-orange full-width" id="btn-pomo-main">Start Focus</button>
+            <div class="timer-secondary-controls">
+                <button class="btn-brutal-secondary micro" id="btn-pomo-break">Short Break</button>
+                <button class="btn-brutal-secondary micro" id="btn-pomo-reset">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="tool-card scratchpad-panel glass-panel">
+        <div class="scratchpad-header">
+            <h3 class="tool-title">Quick Notes</h3>
+            <button class="btn-icon-only" title="Download Notes">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            </button>
+        </div>
+        <textarea class="neo-textarea" placeholder="Jot down formulas, timestamps, or key concepts here..."></textarea>
+    </div>
+
+</aside>
+
+        </div>
+    </main>
+<div id="pomo-modal" class="neo-modal-overlay">
+    <div class="neo-modal-content glass-panel shadow-heavy">
+        <div class="modal-header">
+            <h3>Timer Configuration</h3>
+            <button id="close-pomo-modal" class="btn-icon-only">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group-neo">
+                <label>Focus Session (minutes)</label>
+                <input type="number" id="input-focus-time" class="neo-input" value="25" min="1" max="120">
+            </div>
+            <div class="input-group-neo">
+                <label>Break Session (minutes)</label>
+                <input type="number" id="input-break-time" class="neo-input" value="5" min="1" max="30">
+            </div>
+        </div>
+        <div class="modal-footer" style="margin-top: 24px;">
+            <button id="save-pomo-settings" class="btn-brutal-orange full-width">Save & Reset Timer</button>
+        </div>
+    </div>
+</div>
+<div id="calc-modal" class="neo-modal-overlay">
+    <div class="neo-modal-content glass-panel shadow-heavy" style="max-width: 340px; padding: 24px;">
+        <div class="modal-header" style="margin-bottom: 20px;">
+            <h3>Calculator</h3>
+            <button id="close-calc-modal" class="btn-icon-only">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        
+        <div class="calc-display-wrapper">
+            <input type="text" id="calc-display" class="neo-input" style="text-align: right; font-size: 2rem; letter-spacing: 2px; margin-bottom: 20px; font-family: var(--timer-font); padding: 20px;" disabled value="0">
+        </div>
+        
+        <div class="calc-keypad" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            <button class="btn-calc-key operator" data-val="C">C</button>
+            <button class="btn-calc-key operator" data-val="(">(</button>
+            <button class="btn-calc-key operator" data-val=")">)</button>
+            <button class="btn-calc-key operator" data-val="/">÷</button>
+
+            <button class="btn-calc-key" data-val="7">7</button>
+            <button class="btn-calc-key" data-val="8">8</button>
+            <button class="btn-calc-key" data-val="9">9</button>
+            <button class="btn-calc-key operator" data-val="*">×</button>
+
+            <button class="btn-calc-key" data-val="4">4</button>
+            <button class="btn-calc-key" data-val="5">5</button>
+            <button class="btn-calc-key" data-val="6">6</button>
+            <button class="btn-calc-key operator" data-val="-">-</button>
+
+            <button class="btn-calc-key" data-val="1">1</button>
+            <button class="btn-calc-key" data-val="2">2</button>
+            <button class="btn-calc-key" data-val="3">3</button>
+            <button class="btn-calc-key operator" data-val="+">+</button>
+
+            <button class="btn-calc-key" data-val="0" style="grid-column: span 2;">0</button>
+            <button class="btn-calc-key" data-val=".">.</button>
+            <button class="btn-calc-key equals" data-val="=" style="background: var(--neo-orange); color: white; border: none;">=</button>
+        </div>
+    </div>
+</div>
+<button id="exit-lights-out" class="exit-lights-out-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        <span>Exit Focus</span>
+    </button>
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/player.js"></script>
+    <script type="module" src="./js/transition.js"></script>
+</body>
+</html>

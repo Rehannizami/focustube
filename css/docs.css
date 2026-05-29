@@ -1,0 +1,484 @@
+/* ==========================================================================
+   FOCUSTUBE: DOCUMENTATION STYLESHEET
+   Massive, high-legibility design system for technical reading.
+   Features: Sticky TOC, Custom Scrollbars, Code Blocks, and Brutalist Tables.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. DOCS SPECIFIC TOKENS & OVERRIDES
+   -------------------------------------------------------------------------- */
+:root {
+    --doc-code-bg: #111113;
+    --doc-code-text: #e2e8f0;
+    --doc-code-header: #1e1e24;
+    --doc-border: rgba(0, 0, 0, 0.1);
+    --doc-surface: rgba(255, 255, 255, 0.7);
+    --doc-alert-info-bg: rgba(59, 130, 246, 0.1);
+    --doc-alert-info-border: #3b82f6;
+    --doc-alert-warn-bg: rgba(245, 158, 11, 0.1);
+    --doc-alert-warn-border: #f59e0b;
+}
+
+[data-theme="dark"] {
+    --doc-code-bg: #000000;
+    --doc-code-header: #111111;
+    --doc-border: rgba(255, 255, 255, 0.1);
+    --doc-surface: rgba(20, 20, 25, 0.6);
+    --doc-alert-info-bg: rgba(59, 130, 246, 0.15);
+    --doc-alert-warn-bg: rgba(245, 158, 11, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO & HEADER AREA
+   -------------------------------------------------------------------------- */
+.docs-hero {
+    position: relative;
+    width: 100%;
+    padding: 180px 40px 80px 40px;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--neo-glass-border);
+    overflow: hidden;
+}
+
+.docs-watermark {
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.3;
+}
+
+.docs-hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.giant-docs-title {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    font-weight: 900;
+    color: var(--neo-text-main);
+    letter-spacing: -0.04em;
+    margin: 0;
+    line-height: 1;
+}
+
+.docs-subtitle {
+    font-size: 1.25rem;
+    color: var(--neo-text-muted);
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. MAIN DOCS LAYOUT & GRID
+   -------------------------------------------------------------------------- */
+.docs-viewport {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 60px 40px 120px 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.docs-layout-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 60px;
+    align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   4. STICKY SIDEBAR (TABLE OF CONTENTS)
+   -------------------------------------------------------------------------- */
+.docs-sidebar {
+    position: sticky;
+    top: 100px; /* Sticks right below the main navbar */
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    padding: 32px 24px;
+    border-radius: 20px;
+    background: var(--doc-surface);
+    border: 1px solid var(--neo-glass-border);
+    backdrop-filter: blur(20px);
+}
+
+/* Custom Scrollbar for Sidebar */
+.docs-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.docs-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.docs-sidebar::-webkit-scrollbar-thumb {
+    background: var(--neo-glass-border);
+    border-radius: 10px;
+}
+
+.toc-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.toc-header {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--neo-text-muted);
+    margin: 0 0 12px 0;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.toc-list a {
+    color: var(--neo-text-main);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 6px 12px;
+    border-radius: 8px;
+    display: block;
+    transition: all 0.2s ease;
+    border-left: 2px solid transparent;
+}
+
+.toc-list a:hover, 
+.toc-list a.active {
+    background: rgba(0, 0, 0, 0.04);
+    border-left-color: var(--neo-orange);
+    transform: translateX(4px);
+    color: var(--neo-orange);
+    font-weight: 700;
+}
+
+[data-theme="dark"] .toc-list a:hover,
+[data-theme="dark"] .toc-list a.active {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .toc-list a:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   5. MAIN CONTENT TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.docs-content {
+    padding: 60px;
+    border-radius: 24px;
+    background: var(--doc-surface);
+    border: 1px solid var(--neo-glass-border);
+    backdrop-filter: blur(20px);
+}
+
+.doc-section {
+    margin-bottom: 20px;
+}
+
+.doc-section h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--neo-text-main);
+    letter-spacing: -0.03em;
+    margin: 0 0 24px 0;
+}
+
+.doc-section h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--neo-text-main);
+    margin: 40px 0 16px 0;
+    letter-spacing: -0.02em;
+}
+
+.doc-section p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--neo-text-muted);
+    margin: 0 0 24px 0;
+}
+
+.doc-section .lead-text {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--neo-text-main);
+    line-height: 1.6;
+}
+
+.doc-divider {
+    border: 0;
+    height: 1px;
+    background: var(--neo-glass-border);
+    margin: 60px 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. CUSTOM LISTS
+   -------------------------------------------------------------------------- */
+.doc-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px 0;
+}
+
+.doc-bullet-list li {
+    font-size: 1.1rem;
+    color: var(--neo-text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-left: 28px;
+    position: relative;
+}
+
+.doc-bullet-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--neo-orange);
+    font-weight: 900;
+}
+
+/* --------------------------------------------------------------------------
+   7. KEYBOARD SHORTCUTS & INLINE CODE
+   -------------------------------------------------------------------------- */
+kbd {
+    background: var(--neo-glass-bg);
+    border: 1px solid var(--neo-glass-border);
+    border-bottom: 3px solid var(--neo-glass-border);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.9em;
+    font-weight: 700;
+    color: var(--neo-text-main);
+    white-space: nowrap;
+}
+
+p code, li code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.9em;
+    color: var(--neo-orange);
+}
+
+[data-theme="dark"] p code, [data-theme="dark"] li code {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   8. MAC-STYLE CODE BLOCKS
+   -------------------------------------------------------------------------- */
+.code-block-wrapper {
+    margin: 32px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--doc-code-bg);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-header {
+    background: var(--doc-code-header);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.code-header span {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: lowercase;
+}
+
+.btn-copy-code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-copy-code:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.code-block-wrapper pre {
+    margin: 0;
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.code-block-wrapper code {
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--doc-code-text);
+}
+
+/* Custom Scrollbar for Code Blocks */
+.code-block-wrapper pre::-webkit-scrollbar {
+    height: 8px;
+}
+.code-block-wrapper pre::-webkit-scrollbar-track {
+    background: var(--doc-code-bg);
+}
+.code-block-wrapper pre::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   9. NEO-BRUTALIST ALERTS & CALLOUTS
+   -------------------------------------------------------------------------- */
+.doc-alert {
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 32px 0;
+    border-left: 6px solid;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+.doc-alert strong {
+    font-weight: 800;
+    color: var(--neo-text-main);
+    margin-right: 8px;
+}
+
+.doc-alert.info {
+    background: var(--doc-alert-info-bg);
+    border-color: var(--doc-alert-info-border);
+    color: var(--neo-text-main);
+}
+
+.doc-alert.warning {
+    background: var(--doc-alert-warn-bg);
+    border-color: var(--doc-alert-warn-border);
+    color: var(--neo-text-main);
+}
+
+/* --------------------------------------------------------------------------
+   10. NOTION-STYLE DATA TABLES
+   -------------------------------------------------------------------------- */
+.brutal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 40px 0;
+    text-align: left;
+}
+
+.brutal-table th, .brutal-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--neo-glass-border);
+}
+
+.brutal-table th {
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--neo-text-muted);
+    background: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme="dark"] .brutal-table th {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.brutal-table td {
+    font-size: 1.05rem;
+    color: var(--neo-text-main);
+}
+
+.brutal-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* --------------------------------------------------------------------------
+   11. FOOTER
+   -------------------------------------------------------------------------- */
+.docs-footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--neo-text-muted);
+    font-family: var(--font-pixel, monospace);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--neo-glass-border);
+}
+
+/* --------------------------------------------------------------------------
+   12. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+    .docs-layout-grid {
+        grid-template-columns: 240px 1fr;
+        gap: 40px;
+    }
+    .docs-content {
+        padding: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .docs-hero {
+        padding: 160px 24px 60px 24px;
+    }
+    .giant-docs-title {
+        font-size: 3.5rem;
+    }
+    .docs-layout-grid {
+        grid-template-columns: 1fr; /* Stack sidebar on top */
+    }
+    .docs-sidebar {
+        position: relative;
+        top: 0;
+        max-height: none;
+        overflow-y: visible;
+    }
+    .toc-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .docs-viewport {
+        padding: 40px 20px 80px 20px;
+    }
+    .docs-content {
+        padding: 24px;
+    }
+    .doc-section h2 {
+        font-size: 2rem;
+    }
+    .brutal-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

@@ -1,0 +1,647 @@
+/* ==========================================================================
+   FOCUSTUBE: NEO-BRUTALIST SEARCH PAGE STYLESHEET
+   Extensive design system for search grid, filters, and glassmorphism cards.
+   Length: 450+ lines of robust, responsive CSS.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. SEARCH SPECIFIC TOKENS & OVERRIDES
+   -------------------------------------------------------------------------- */
+:root {
+    --card-bg-light: rgba(255, 255, 255, 0.7);
+    --card-bg-hover-light: rgba(255, 255, 255, 0.95);
+    --skeleton-base-light: rgba(0, 0, 0, 0.05);
+    --skeleton-shine-light: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] {
+    --card-bg-dark: rgba(20, 20, 25, 0.6);
+    --card-bg-hover-dark: rgba(30, 30, 35, 0.95);
+    --skeleton-base-dark: rgba(255, 255, 255, 0.05);
+    --skeleton-shine-dark: rgba(255, 255, 255, 0.1);
+}
+
+/* --------------------------------------------------------------------------
+   2. VIEWPORT & STRUCTURAL LAYOUT
+   -------------------------------------------------------------------------- */
+.search-viewport {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 120px 40px 60px 40px;
+    max-width: 1600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   3. BACKGROUND WATERMARKS & FLOATING DECOR
+   -------------------------------------------------------------------------- */
+.search-watermark {
+    top: 15%;
+    bottom: auto;
+    opacity: 0.6;
+}
+
+.floating-decor {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    z-index: 5;
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.1));
+}
+
+.decor-1 { top: 25%; left: 10%; font-size: 4rem; }
+.decor-2 { top: 60%; right: 8%; font-size: 5rem; }
+.decor-3 { bottom: 20%; left: 15%; font-size: 3rem; }
+
+[data-theme="dark"] .floating-decor {
+    filter: drop-shadow(0 20px 30px rgba(0,0,0,0.5));
+}
+
+/* --------------------------------------------------------------------------
+   4. SEARCH HERO SECTION
+   -------------------------------------------------------------------------- */
+.search-hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+    width: 100%;
+}
+
+.search-header-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-input-wrapper {
+    width: 100%;
+    max-width: 800px;
+    padding: 8px;
+    border-radius: 20px;
+    background: var(--neo-glass-bg);
+    border: 2px solid var(--neo-glass-border);
+    backdrop-filter: blur(20px);
+    box-shadow: var(--neo-shadow);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.search-input-wrapper:focus-within {
+    transform: translateY(-4px);
+    border-color: var(--neo-orange);
+    box-shadow: 0 20px 40px rgba(242, 97, 1, 0.15);
+}
+
+.brutal-search-form {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.input-icon {
+    padding-left: 16px;
+    color: var(--neo-text-muted);
+    display: flex;
+    align-items: center;
+}
+
+.brutal-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--neo-text-main);
+    font-size: 1.15rem;
+    font-family: var(--font-sans);
+    padding: 16px 8px;
+    outline: none;
+}
+
+.brutal-input::placeholder {
+    color: var(--neo-text-muted);
+    opacity: 0.7;
+}
+
+.search-submit-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    margin-right: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   5. SEARCH GRID LAYOUT (SIDEBAR + CONTENT)
+   -------------------------------------------------------------------------- */
+.search-layout-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    width: 100%;
+    align-items: start;
+}
+
+/* --------------------------------------------------------------------------
+   6. FILTER SIDEBAR
+   -------------------------------------------------------------------------- */
+.search-filter-sidebar {
+    position: sticky;
+    top: 100px; /* Stays fixed below navbar when scrolling */
+    background: var(--neo-glass-bg);
+    border: 1px solid var(--neo-glass-border);
+    border-radius: 20px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--neo-glass-border);
+    padding-bottom: 16px;
+}
+
+.filter-header h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin: 0;
+    color: var(--neo-text-main);
+}
+
+.clear-filters-btn {
+    background: transparent;
+    border: none;
+    color: var(--neo-orange);
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.clear-filters-btn:hover {
+    opacity: 0.7;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.filter-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--neo-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Brutalist Custom Checkboxes & Radios */
+.brutal-checkbox, .brutal-radio {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--neo-text-main);
+    cursor: pointer;
+    user-select: none;
+}
+
+.brutal-checkbox input, .brutal-radio input {
+    display: none;
+}
+
+.checkbox-visual, .radio-visual {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--neo-text-muted);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.radio-visual {
+    border-radius: 50%;
+}
+
+.brutal-checkbox input:checked + .checkbox-visual,
+.brutal-radio input:checked + .radio-visual {
+    background: var(--neo-orange);
+    border-color: var(--neo-orange);
+}
+
+.brutal-checkbox input:checked + .checkbox-visual::after {
+    content: '✓';
+    color: white;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.brutal-radio input:checked + .radio-visual::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+}
+
+/* --------------------------------------------------------------------------
+   7. RESULTS AREA & GRID SYSTEM
+   -------------------------------------------------------------------------- */
+.search-results-area {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+.results-grid {
+    display: grid;
+    /* Responsive auto-fill: creates beautiful grids on any monitor size */
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   8. NEO-BRUTALIST VIDEO CARD
+   -------------------------------------------------------------------------- */
+.neo-video-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--card-bg-light);
+    border: 1px solid var(--neo-glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+[data-theme="dark"] .neo-video-card {
+    background: var(--card-bg-dark);
+}
+
+.neo-video-card:hover {
+    transform: translateY(-8px) scale(1.01);
+    border-color: var(--neo-orange);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px var(--neo-orange);
+    background: var(--card-bg-hover-light);
+}
+
+[data-theme="dark"] .neo-video-card:hover {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--neo-orange);
+    background: var(--card-bg-hover-dark);
+}
+
+/* Card Thumbnail */
+.card-thumbnail-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--neo-glass-border);
+    background: #000;
+}
+
+.card-thumbnail-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.neo-video-card:hover .card-thumbnail-wrapper img {
+    transform: scale(1.08);
+}
+
+/* Duration Badge */
+.duration-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+    letter-spacing: 0.05em;
+    font-family: var(--font-pixel);
+}
+
+/* Play Overlay (Appears on Hover) */
+.play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(242, 97, 1, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    color: white;
+}
+
+.neo-video-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.play-overlay svg {
+    background: var(--neo-orange);
+    border-radius: 50%;
+    padding: 12px;
+    width: 56px;
+    height: 56px;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.neo-video-card:hover .play-overlay svg {
+    transform: scale(1);
+}
+
+/* Card Metadata */
+.card-metadata {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 12px;
+}
+
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--neo-text-main);
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-channel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.channel-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--neo-text-muted);
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: var(--neo-text-muted);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    opacity: 0.8;
+}
+
+/* Pill Tags inside card */
+.card-tags {
+    display: flex;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 12px;
+}
+
+.brutal-tag {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--neo-text-main);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--neo-glass-border);
+}
+
+[data-theme="dark"] .brutal-tag {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --------------------------------------------------------------------------
+   9. SKELETON LOADING UI (Advanced Shimmer Effect)
+   -------------------------------------------------------------------------- */
+.video-card-skeleton {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--neo-glass-border);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.pulse-animation {
+    background: linear-gradient(
+        90deg,
+        var(--skeleton-base-light) 25%,
+        var(--skeleton-shine-light) 50%,
+        var(--skeleton-base-light) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}
+
+[data-theme="dark"] .pulse-animation {
+    background: linear-gradient(
+        90deg,
+        var(--skeleton-base-dark) 25%,
+        var(--skeleton-shine-dark) 50%,
+        var(--skeleton-base-dark) 75%
+    );
+    background-size: 200% 100%;
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+.skeleton-thumbnail {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.skeleton-info {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.skeleton-title {
+    height: 20px;
+    width: 90%;
+    border-radius: 4px;
+}
+
+.skeleton-title.short {
+    width: 60%;
+}
+
+.skeleton-meta {
+    height: 16px;
+    width: 40%;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+/* --------------------------------------------------------------------------
+   10. PAGINATION UI
+   -------------------------------------------------------------------------- */
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 20px;
+    padding-top: 40px;
+    border-top: 1px solid var(--neo-glass-border);
+}
+
+.btn-pagination {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--neo-glass-bg);
+    color: var(--neo-text-main);
+    border: 1px solid var(--neo-glass-border);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-pagination:hover:not(:disabled) {
+    border-color: var(--neo-orange);
+    color: var(--neo-orange);
+    transform: translateY(-2px);
+}
+
+.btn-pagination:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-numbers {
+    display: flex;
+    gap: 8px;
+}
+
+.page-num {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    color: var(--neo-text-muted);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-num:hover {
+    background: var(--neo-glass-bg);
+    border-color: var(--neo-glass-border);
+}
+
+.page-num.active {
+    background: var(--neo-orange);
+    color: white;
+    border-color: var(--neo-orange);
+}
+
+/* --------------------------------------------------------------------------
+   11. RESPONSIVE BREAKPOINTS
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .search-layout-grid {
+        /* Move sidebar above results on smaller screens */
+        grid-template-columns: 1fr;
+    }
+
+    .search-filter-sidebar {
+        position: relative;
+        top: 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 24px;
+        justify-content: space-between;
+    }
+
+    .filter-group {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-viewport {
+        padding: 100px 20px 40px 20px;
+    }
+    
+    .hero-main-statement {
+        font-size: 2.5rem;
+    }
+
+    .search-submit-btn span {
+        display: none; /* Hide text, keep icon on mobile */
+    }
+
+    .search-submit-btn {
+        padding: 16px;
+    }
+
+    .results-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+
+    .floating-decor {
+        display: none; /* Hide floating emojis on small screens to save space */
+    }
+}

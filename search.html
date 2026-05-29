@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discover | FocusTube</title>
+    <meta name="description" content="Search for educational videos in a distraction-free neo-brutalist environment.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/global.css">
+    <link rel="stylesheet" href="./css/landing.css">
+    <link rel="stylesheet" href="./css/search.css">
+</head>
+<body>
+
+    <header class="pill-navbar-container">
+        <div class="nav-brand-logo">
+            <span class="brand-accent">❖</span> FocusTube
+        </div>
+        
+        <nav class="nav-pill-group">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/search" class="nav-link active">Search</a>
+            <a href="#" class="nav-link">Library</a>
+            <a href="#" class="nav-link">Notes</a>
+        </nav>
+
+        <button id="themeToggle" class="btn-pill-action">Dark Mode</button>
+    </header>
+
+    <div class="brutal-watermark-wrap search-watermark">
+        <h1 class="watermark-text watermark-solid">FIND</h1>
+        <h1 class="watermark-text watermark-pixel layer-decor-low">KNOWLEDGE</h1>
+    </div>
+
+    <div class="layer-decor-high floating-decor decor-1">🔍</div>
+    <div class="layer-decor-low floating-decor decor-2">📚</div>
+    <div class="layer-main-focus floating-decor decor-3">⚡</div>
+
+    <main class="search-viewport">
+        
+        <section class="search-hero-section">
+            <div class="search-header-text">
+                <span class="hero-index-tag">[EXPLORE]</span>
+                <h1 class="hero-main-statement">Locate Your<br>Lecture</h1>
+            </div>
+
+            <div class="search-input-wrapper glass-panel">
+                <form id="search-form" class="brutal-search-form">
+                    <div class="input-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </div>
+                    <input 
+                        type="text" 
+                        id="search-input" 
+                        class="brutal-input" 
+                        placeholder="Search for organic chemistry, physics derivations..." 
+                        autocomplete="off"
+                        required
+                    >
+                    <button type="submit" class="btn-brutal-orange search-submit-btn">
+                        <span>Search</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <div class="search-layout-grid">
+            
+            <aside class="search-filter-sidebar glass-panel">
+                <div class="filter-header">
+                    <h3>Filters</h3>
+                    <button class="clear-filters-btn">Clear All</button>
+                </div>
+                
+                <div class="filter-group">
+                    <h4 class="filter-title">Topic Category</h4>
+                    <div class="filter-options">
+                        <label class="brutal-checkbox">
+                            <input type="checkbox" checked>
+                            <span class="checkbox-visual"></span>
+                            Physics
+                        </label>
+                        <label class="brutal-checkbox">
+                            <input type="checkbox">
+                            <span class="checkbox-visual"></span>
+                            Chemistry
+                        </label>
+                        <label class="brutal-checkbox">
+                            <input type="checkbox">
+                            <span class="checkbox-visual"></span>
+                            Mathematics
+                        </label>
+                        <label class="brutal-checkbox">
+                            <input type="checkbox">
+                            <span class="checkbox-visual"></span>
+                            Biology
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Video Duration</h4>
+                    <div class="filter-options">
+                        <label class="brutal-radio">
+                            <input type="radio" name="duration" checked>
+                            <span class="radio-visual"></span>
+                            Any duration
+                        </label>
+                        <label class="brutal-radio">
+                            <input type="radio" name="duration">
+                            <span class="radio-visual"></span>
+                            Under 10 minutes
+                        </label>
+                        <label class="brutal-radio">
+                            <input type="radio" name="duration">
+                            <span class="radio-visual"></span>
+                            10 - 30 minutes
+                        </label>
+                        <label class="brutal-radio">
+                            <input type="radio" name="duration">
+                            <span class="radio-visual"></span>
+                            Over 30 minutes
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="search-results-area">
+                
+                <div id="loading-state" class="results-grid" style="display: none;">
+                    <div class="video-card-skeleton glass-panel">
+                        <div class="skeleton-thumbnail pulse-animation"></div>
+                        <div class="skeleton-info">
+                            <div class="skeleton-title pulse-animation"></div>
+                            <div class="skeleton-title short pulse-animation"></div>
+                            <div class="skeleton-meta pulse-animation"></div>
+                        </div>
+                    </div>
+                    <div class="video-card-skeleton glass-panel">
+                        <div class="skeleton-thumbnail pulse-animation"></div>
+                        <div class="skeleton-info">
+                            <div class="skeleton-title pulse-animation"></div>
+                            <div class="skeleton-title short pulse-animation"></div>
+                            <div class="skeleton-meta pulse-animation"></div>
+                        </div>
+                    </div>
+                    <div class="video-card-skeleton glass-panel">
+                        <div class="skeleton-thumbnail pulse-animation"></div>
+                        <div class="skeleton-info">
+                            <div class="skeleton-title pulse-animation"></div>
+                            <div class="skeleton-title short pulse-animation"></div>
+                            <div class="skeleton-meta pulse-animation"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="results-container" class="results-grid">
+                    
+                    <a href="/player?v=EXAMPLE_ID" class="neo-video-card glass-panel">
+                        <div class="card-thumbnail-wrapper">
+                            <img src="https://images.unsplash.com/photo-1632516643720-e7f5d7d6eca9?q=80&w=600&auto=format&fit=crop" alt="Thumbnail placeholder">
+                            <div class="duration-badge">24:15</div>
+                            <div class="play-overlay">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="card-metadata">
+                            <h3 class="card-title">Preparation of Dinitrogen | P-Block Elements | Advanced Chemistry</h3>
+                            <div class="card-channel">
+                                <span class="channel-name">Ekeeda Chemistry</span>
+                                <svg class="verified-badge" width="14" height="14" viewBox="0 0 24 24" fill="var(--neo-orange)">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                                </svg>
+                            </div>
+                            <p class="card-description">Comprehensive breakdown of the laboratory preparation of Dinitrogen, including thermal decomposition of sodium azide and ammonium dichromate.</p>
+                            <div class="card-tags">
+                                <span class="brutal-tag">Chemistry</span>
+                                <span class="brutal-tag">Lecture</span>
+                            </div>
+                        </div>
+                    </a>
+
+                </div>
+
+                <div class="pagination-wrapper">
+                    <button class="btn-pagination" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                        Prev
+                    </button>
+                    <div class="pagination-numbers">
+                        <button class="page-num active">1</button>
+                        <button class="page-num">2</button>
+                        <button class="page-num">3</button>
+                    </div>
+                    <button class="btn-pagination">
+                        Next
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <script type="module" src="./js/theme.js"></script>
+    <script type="module" src="./js/search.js"></script>
+    <script type="module" src="./js/transition.js"></script>
+</body>
+</html>

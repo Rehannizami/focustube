@@ -1,0 +1,22 @@
+/* Make the headings bold, tight, and impactful */
+.hero-main-statement {
+    font-family: var(--font-sans);
+    font-weight: 900; /* Ultra-black weight */
+    letter-spacing: -0.05em; /* Tightens the spacing for a brutalist look */
+    line-height: 0.9;
+    text-transform: uppercase;
+}
+
+/* Make the index tag look like a terminal log */
+.hero-index-tag {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+/* Force buttons to use the sharp UI font */
+.btn-brutal-orange, .btn-brutal-secondary {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+}
