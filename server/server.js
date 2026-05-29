@@ -9,7 +9,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -49,6 +48,6 @@ app.use((req, res) => {
     res.status(404).send('Page not found on FocusTube');
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 FocusTube server is running at http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 FocusTube server is running on port ${PORT}`);
 });
